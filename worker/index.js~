@@ -1,0 +1,191 @@
+const page = String.raw`<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Resignation Stamp Card</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script><script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    :root{--ink:#241c35;--muted:#716a7e;--paper:#fffdf8;--violet:#7656df;--pink:#f35f9f;--orange:#ff9d53;--mint:#9ae7ce;--line:#e8dfed;--shadow:0 24px 65px rgba(57,35,82,.15)}*{box-sizing:border-box}html{background:#f8f3ff}body{min-width:320px;margin:0;color:var(--ink);font-family:'DM Sans',sans-serif;background:radial-gradient(circle at 8% 6%,#fbd9ea 0,transparent 25rem),radial-gradient(circle at 92% 20%,#d5c8ff 0,transparent 30rem),linear-gradient(135deg,#f9f6ff,#fff8ed 55%,#effff8);min-height:100vh}.wrap{width:min(1120px,calc(100% - 32px));margin:auto;padding:48px 0 64px}.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:end;margin-bottom:30px}.eyebrow{color:var(--violet);font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}.hero h1{font:clamp(2.8rem,6vw,5.5rem)/.92 'DM Serif Display',serif;letter-spacing:-.05em;margin:10px 0 15px}.hero h1 em{color:var(--pink);font-style:italic}.hero p{max-width:550px;color:var(--muted);font-size:1.05rem;line-height:1.6;margin:0}.identity{background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.9);border-radius:24px;padding:21px;box-shadow:var(--shadow);backdrop-filter:blur(16px)}label,.field-label{display:block;font-size:.79rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}.name-row{display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:#fff;border-radius:13px;padding:0 13px}.name-row svg{color:var(--violet);width:19px}.name-row input{font:inherit;color:var(--ink);border:0;outline:0;width:100%;padding:14px 0;background:transparent}.card{background:rgba(255,253,248,.92);border:1px solid rgba(255,255,255,.95);box-shadow:var(--shadow);border-radius:32px;overflow:hidden}.card-head{background:linear-gradient(112deg,#342257,#7656df 70%,#9b7bff);padding:30px 34px;color:white;position:relative;overflow:hidden}.card-head:after{content:'';position:absolute;width:270px;height:270px;border:48px solid rgba(255,255,255,.09);right:-110px;top:-155px;border-radius:50%}.brand{display:flex;align-items:center;justify-content:space-between;gap:18px;position:relative;z-index:1}.brand-name{font-weight:700;font-size:1.15rem}.cardholder{font:clamp(1.8rem,3.5vw,2.8rem)/1 'DM Serif Display',serif;margin:17px 0 0;overflow-wrap:anywhere}.number{font-variant-numeric:tabular-nums;opacity:.78;font-size:.78rem;letter-spacing:.12em}.card-body{padding:30px 34px 34px}.card-top{display:grid;grid-template-columns:1fr auto;gap:25px;align-items:center}.progress-copy strong{font-size:1.5rem;display:block}.progress-copy span{color:var(--muted);font-size:.9rem}.bar{height:11px;border-radius:99px;background:#ede8f1;overflow:hidden;margin-top:13px}.bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--pink),var(--orange));transition:width .45s ease}.ring{--p:0;display:grid;place-items:center;width:84px;aspect-ratio:1;border-radius:50%;background:conic-gradient(var(--pink) calc(var(--p)*1%),#eee8f2 0);position:relative}.ring:before{content:'';position:absolute;inset:8px;border-radius:50%;background:var(--paper)}.ring b{position:relative;font-size:1rem}.status{margin:24px 0 17px;background:#f3efff;color:#543da9;border-radius:12px;padding:10px 13px;font-weight:600;font-size:.92rem}.slots{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.slot{border:2px dashed #ded4e5;background:#fffdf9;aspect-ratio:1;border-radius:16px;color:#c5bacb;display:grid;place-items:center;cursor:pointer;transition:transform .18s,background .18s,border-color .18s;position:relative}.slot:hover,.slot:focus-visible{transform:translateY(-3px);border-color:var(--violet);outline:3px solid rgba(118,86,223,.2);outline-offset:2px}.slot span{font-size:1.7rem;filter:grayscale(1);opacity:.45}.slot.filled{border-style:solid;border-color:var(--ink);color:var(--ink);background:linear-gradient(145deg,#fff9ed,#ffe8d4);box-shadow:0 5px 0 rgba(36,28,53,.12)}.slot.filled span{filter:none;opacity:1;font-size:2rem}.slot.filled:after{content:'×';position:absolute;top:3px;right:7px;font-weight:700;font-size:.8rem;color:#8d8492}.picker-wrap{padding:0 34px 30px}.picker{display:flex;flex-wrap:wrap;gap:9px}.stamp-choice input{position:absolute;opacity:0}.stamp-choice label{cursor:pointer;margin:0;text-transform:none;letter-spacing:0;display:flex;align-items:center;gap:7px;padding:9px 12px;border-radius:11px;border:1px solid var(--line);background:#fff;font-size:.88rem;transition:.18s}.stamp-choice label b{font-size:1.12rem}.stamp-choice input:checked+label{background:#342257;color:#fff;border-color:#342257;box-shadow:0 5px 14px rgba(52,34,87,.22)}.stamp-choice input:focus-visible+label{outline:3px solid rgba(118,86,223,.3);outline-offset:2px}.footer{border-top:1px solid var(--line);padding:21px 34px;display:flex;align-items:center;justify-content:space-between;gap:16px}.note{color:var(--muted);font-size:.78rem;line-height:1.4;max-width:480px}.actions{display:flex;gap:8px}.button{font:700 .87rem 'DM Sans';border:0;cursor:pointer;border-radius:11px;padding:10px 13px;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:transform .18s,box-shadow .18s}.button:hover{transform:translateY(-2px);box-shadow:0 7px 16px rgba(36,28,53,.14)}.button:focus-visible{outline:3px solid rgba(118,86,223,.35);outline-offset:2px}.primary{color:#fff;background:#342257}.secondary{color:#493b59;background:#eee8f3}.toast{position:fixed;z-index:10;right:20px;bottom:20px;max-width:min(360px,calc(100% - 40px));background:#342257;color:#fff;border-radius:14px;padding:13px 16px;box-shadow:var(--shadow);transform:translateY(120%);transition:transform .3s ease}.toast.show{transform:translateY(0)}.completion{display:none;margin:20px 34px 0;padding:14px;border-radius:14px;background:linear-gradient(90deg,#ffedb5,#ffd4e4);font-weight:700;text-align:center}.completion.show{display:block}@media(max-width:680px){.wrap{width:min(100% - 22px,1120px);padding-top:28px}.hero{grid-template-columns:1fr;gap:20px}.hero h1{font-size:3.5rem}.card-head,.card-body,.picker-wrap,.footer{padding-left:20px;padding-right:20px}.slots{gap:8px}.slot{border-radius:12px}.slot span{font-size:1.35rem}.slot.filled span{font-size:1.5rem}.card-top{gap:12px}.footer{align-items:stretch;flex-direction:column}.actions{justify-content:stretch}.actions .button{justify-content:center;flex:1}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  .slots{grid-template-columns:repeat(10,1fr);gap:8px;max-width:680px}.slot{border-radius:11px}.slot span{font-size:1.25rem}.slot.filled span{font-size:1.55rem}.slot.filled:after{top:1px;right:5px;font-size:.7rem}@media(max-width:680px){.slots{grid-template-columns:repeat(5,1fr);gap:7px;max-width:none}.slot{border-radius:10px}.slot span{font-size:1.2rem}.slot.filled span{font-size:1.4rem}}
+  .slot.filled:after{content:'+';top:2px;right:5px;display:grid;place-items:center;width:16px;height:16px;border-radius:50%;font-size:.72rem;color:#fff;background:var(--violet)}.slot.has-note:after{content:'✎';background:var(--ink)}.slot-hint{margin:10px 0 0;color:var(--muted);font-size:.78rem;text-align:right}.swal2-textarea{font-family:'DM Sans',sans-serif!important;line-height:1.45!important;resize:vertical}@media(min-width:681px){.slots{grid-template-columns:repeat(7,1fr);max-width:620px}}@keyframes card-victory{0%,100%{transform:translateY(0)}25%{transform:translateY(-7px) rotate(-.35deg)}55%{transform:translateY(-3px) rotate(.3deg)}}@keyframes stamp-victory{0%{transform:scale(1)}50%{transform:scale(1.16) rotate(-7deg)}100%{transform:scale(1) rotate(0)}}@keyframes completion-victory{0%{opacity:0;transform:translateY(16px) scale(.94)}65%{opacity:1;transform:translateY(-3px) scale(1.025)}100%{transform:translateY(0) scale(1)}}.card.celebrating{animation:card-victory .78s cubic-bezier(.2,.8,.25,1)}.card.celebrating .slot.filled{animation:stamp-victory .52s cubic-bezier(.2,.9,.3,1) both}.completion.show{animation:completion-victory .62s cubic-bezier(.2,.9,.3,1) both}
+  </style>
+</head>
+<body><main class="wrap">
+ <header class="hero"><div><div class="eyebrow">The morale department presents</div><h1>Resignation<br><em>Stamp Card</em></h1><p>A tiny, delightfully dramatic way to recognise the small wins. Collect twenty stamps—then take a breath and make your next move thoughtfully.</p></div><section class="identity" aria-label="Cardholder details"><label for="name">Cardholder name</label><div class="name-row"><i data-lucide="user-round" aria-hidden="true"></i><input id="name" maxlength="40" autocomplete="name" placeholder="Enter your name"></div></section></header>
+ <section class="card" aria-labelledby="card-title"><div class="card-head"><div class="brand"><span class="brand-name">✦ The Definitely-Official Club</span><span class="number">CARD NO. <span id="number">0000</span></span></div><h2 id="card-title" class="cardholder">Unnamed legend</h2></div>
+ <div class="card-body"><div class="card-top"><div class="progress-copy"><strong><span id="completed">0</span> of 20 stamps</strong><span id="percent">0% complete</span><div class="bar" aria-label="Completion progress"><i id="bar"></i></div></div><div class="ring" id="ring" aria-label="0 percent complete"><b id="ring-text">0%</b></div></div><p class="status" id="status">Your card is pristine. Pick a stamp and begin.</p><div class="slots" id="slots" role="group" aria-label="Twenty resignation stamp slots"></div></div>
+ <div class="picker-wrap"><p class="field-label" id="picker-label">Choose your stamp</p><div class="picker" role="radiogroup" aria-labelledby="picker-label" id="picker"></div></div><div class="completion" id="completion">🎉 Card complete! You have earned the right to dramatically close a laptop (gently).</div>
+ <footer class="footer"><p class="note">For morale only—not HR, legal, employment, or life advice. Your card stays in this browser unless you export it.</p><div class="actions"><input id="import-file" type="file" accept="application/json,.json" hidden><button class="button secondary" id="import" type="button"><i data-lucide="upload" aria-hidden="true"></i> Import JSON</button><button class="button secondary" id="reset" type="button" aria-label="Reset collected stamps"><i data-lucide="rotate-ccw" aria-hidden="true"></i> Reset</button><button class="button primary" id="export" type="button"><i data-lucide="download" aria-hidden="true"></i> Export JSON</button></div></footer></section>
+ </main><div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(()=>{'use strict';const KEY='resignation-stamp-card-v2',TOTAL=20,valid=['trash','hammer','fire','fist','bolt','knife','bald','gun'];const info={trash:['🗑️','Trash'],hammer:['🔨','Hammer'],fire:['🔥','Fire'],fist:['✊','Fist'],bolt:['⚡','Lightning'],knife:['🔪','Knife'],bald:['🧑‍🦲','Bald person'],gun:['🔫','Water pistol']};let storage=true;const fresh=()=>({version:2,name:'',selectedStamp:'fire',stamps:Array(TOTAL).fill(null),updatedAt:new Date().toISOString()});let state=fresh();try{const saved=JSON.parse(localStorage.getItem(KEY));if(saved&&typeof saved==='object'){state={...fresh(),...saved,stamps:Array.from({length:TOTAL},(_,i)=>valid.includes(saved.stamps?.[i])?saved.stamps[i]:null),selectedStamp:valid.includes(saved.selectedStamp)?saved.selectedStamp:'fire',name:typeof saved.name==='string'?saved.name.slice(0,40):''}}}catch(_){storage=false}const $=s=>document.querySelector(s),name=$('#name'),slots=$('#slots'),picker=$('#picker'),toast=$('#toast');const four=s=>{let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return String((h%9000)+1000)};function save(){state.updatedAt=new Date().toISOString();try{if(storage)localStorage.setItem(KEY,JSON.stringify(state))}catch(_){storage=false}}function say(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(say.t);say.t=setTimeout(()=>toast.classList.remove('show'),3400)}function confetti(big=false){if(window.confetti)window.confetti({particleCount:big?180:80,spread:big?110:65,origin:{y:.65},colors:['#7656df','#f35f9f','#ff9d53','#9ae7ce']})}function render(){name.value=state.name;$('#card-title').textContent=state.name||'Unnamed legend';$('#number').textContent=four(state.name||'anonymous');const n=state.stamps.filter(Boolean).length,p=Math.round(n/TOTAL*100);$('#completed').textContent=n;$('#percent').textContent=p+'% complete';$('#bar').style.width=p+'%';$('#ring').style.setProperty('--p',p);$('#ring').setAttribute('aria-label',p+' percent complete');$('#ring-text').textContent=p+'%';$('#completion').classList.toggle('show',n===TOTAL);$('#status').textContent=n===0?'Your card is pristine. Pick a stamp and begin.':n<TOTAL?'Momentum acquired—'+(TOTAL-n)+' stamp'+(TOTAL-n===1?'':'s')+' to go.':'Full card achieved. The desk plants are proud.';slots.innerHTML='';state.stamps.forEach((stamp,i)=>{const b=document.createElement('button');b.type='button';b.className='slot '+(stamp?'filled':'');b.dataset.index=i;b.setAttribute('aria-label',stamp?'Remove '+info[stamp][1]+' stamp from slot '+(i+1):'Add '+info[state.selectedStamp][1]+' stamp to empty slot '+(i+1));b.innerHTML='<span aria-hidden="true">'+(stamp?info[stamp][0]:'✦')+'</span>';slots.append(b)});picker.innerHTML='';valid.forEach(k=>{const id='stamp-'+k,wrap=document.createElement('span');wrap.className='stamp-choice';wrap.innerHTML='<input type="radio" id="'+id+'" name="stamp" value="'+k+'" '+(state.selectedStamp===k?'checked':'')+'><label for="'+id+'"><b aria-hidden="true">'+info[k][0]+'</b>'+info[k][1]+'</label>';picker.append(wrap)});if(window.lucide)lucide.createIcons()}function milestone(n){if([5,10,15,20].includes(n)){confetti(n===20);say(n===20?'Twenty stamps! That is a whole card.':'Milestone unlocked: '+n+' stamps!')}}name.addEventListener('input',()=>{state.name=name.value.slice(0,40);save();render()});picker.addEventListener('change',e=>{state.selectedStamp=e.target.value;save();render();if(window.anime)anime({targets:e.target.nextElementSibling,scale:[.9,1],duration:260,easing:'easeOutBack'})});slots.addEventListener('click',e=>{const b=e.target.closest('.slot');if(!b)return;const i=+b.dataset.index,was=state.stamps[i];state.stamps[i]=was?null:state.selectedStamp;save();render();if(!was){milestone(state.stamps.filter(Boolean).length);if(window.anime)anime({targets:slots.children[i],scale:[.65,1],rotate:[-10,0],duration:360,easing:'easeOutElastic(1,.6)'})}else say('Stamp removed. A tiny act of restraint.')});$('#export').addEventListener('click',()=>{const out={version:2,name:state.name,selectedStamp:state.selectedStamp,stamps:state.stamps,updatedAt:state.updatedAt,exportedAt:new Date().toISOString(),goalName:'Resignation Stamp Card',completedStampCount:state.stamps.filter(Boolean).length,totalStampCount:TOTAL};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(out,null,2)],{type:'application/json'}));a.download=((state.name.trim().replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'').toLowerCase())||'resignation-stamp-card')+'.json';a.click();URL.revokeObjectURL(a.href);say('Your card has been exported as JSON.')});$('#reset').addEventListener('click',async()=>{let yes=false;if(window.Swal){const r=await Swal.fire({title:'Clear all stamps?',text:'Your name and selected stamp will stay put.',icon:'warning',showCancelButton:true,confirmButtonText:'Yes, clear it',confirmButtonColor:'#7656df'});yes=r.isConfirmed}else yes=confirm('Clear all collected stamps? Your name and selected stamp will stay.');if(yes){state.stamps=Array(TOTAL).fill(null);save();render();say('Fresh card, same magnificent potential.')}});render();if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&window.anime)anime({targets:'.hero,.card',opacity:[0,1],translateY:[18,0],delay:anime.stagger(100),duration:700,easing:'easeOutCubic'})})();
+</script>
+<script>
+(()=>{'use strict';
+  const CARD_KEY='resignation-stamp-card-v2',NOTES_KEY='resignation-stamp-card-notes-v1',TOTAL=20,MAX_NOTE=160;
+  const validStamps=['trash','hammer','fire','fist','bolt','knife','bald','gun'];
+  const slots=document.querySelector('#slots'),exportButton=document.querySelector('#export'),importButton=document.querySelector('#import'),importFile=document.querySelector('#import-file');
+  let bypassFilledClick=false;
+  let notes=Array(TOTAL).fill('');
+  try{
+    const saved=JSON.parse(localStorage.getItem(NOTES_KEY));
+    if(Array.isArray(saved))notes=Array.from({length:TOTAL},(_,i)=>typeof saved[i]==='string'?saved[i].slice(0,MAX_NOTE):'');
+  }catch(_){}
+
+  const saveNotes=()=>{try{localStorage.setItem(NOTES_KEY,JSON.stringify(notes))}catch(_){}};
+  const cardState=()=>{try{return JSON.parse(localStorage.getItem(CARD_KEY))||{}}catch(_){return {}}};
+  function syncSlots(){
+    const buttons=[...slots.querySelectorAll('.slot')];
+    let changed=false;
+    buttons.forEach((button,index)=>{
+      const filled=button.classList.contains('filled');
+      if(!filled&&notes[index]){notes[index]='';changed=true}
+      const note=notes[index]||'';
+      button.classList.toggle('has-note',filled&&Boolean(note));
+      if(filled){
+        const stamp=cardState().stamps?.[index]||'filled';
+        button.title=note?'Note: '+note:'Add a note';
+        button.setAttribute('aria-label',(note?'Edit note for ':'Add note to ')+stamp+' stamp in slot '+(index+1));
+      }
+    });
+    if(changed)saveNotes();
+  }
+
+  const hint=document.createElement('p');
+  hint.className='slot-hint';
+  hint.textContent='Tap a filled stamp to add or edit its note.';
+  slots.insertAdjacentElement('afterend',hint);
+  new MutationObserver(syncSlots).observe(slots,{childList:true});
+  syncSlots();
+
+  async function editNote(index,button){
+    const existing=notes[index]||'';
+    if(window.Swal){
+      const result=await Swal.fire({
+        title:'Stamp '+(index+1)+' note',
+        input:'textarea',
+        inputValue:existing,
+        inputLabel:'What happened? Capture the small win, final straw, or moment worth remembering.',
+        inputPlaceholder:'Add a short note…',
+        inputAttributes:{maxlength:String(MAX_NOTE),'aria-label':'Note for stamp '+(index+1)},
+        showCancelButton:true,
+        showDenyButton:true,
+        confirmButtonText:'Save note',
+        denyButtonText:'Remove stamp',
+        confirmButtonColor:'#7656df',
+        denyButtonColor:'#e05272',
+        reverseButtons:true,
+        preConfirm:value=>String(value||'').trim().slice(0,MAX_NOTE)
+      });
+      if(result.isDenied){
+        notes[index]='';saveNotes();
+        bypassFilledClick=true;button.click();bypassFilledClick=false;
+      }else if(result.isConfirmed){
+        notes[index]=result.value||'';saveNotes();syncSlots();
+      }
+      return;
+    }
+    const value=prompt('Note for stamp '+(index+1)+' (maximum '+MAX_NOTE+' characters):',existing);
+    if(value!==null){notes[index]=value.trim().slice(0,MAX_NOTE);saveNotes();syncSlots()}
+  }
+
+  document.addEventListener('click',event=>{
+    const button=event.target.closest?.('.slot.filled');
+    if(!button||bypassFilledClick)return;
+    event.preventDefault();event.stopImmediatePropagation();
+    editNote(Number(button.dataset.index),button);
+  },true);
+
+  exportButton.addEventListener('click',event=>{
+    event.preventDefault();event.stopImmediatePropagation();
+    const state=cardState();
+    const out={version:3,name:state.name||'',selectedStamp:state.selectedStamp||'fire',stamps:Array.from({length:TOTAL},(_,i)=>state.stamps?.[i]||null),notes:Array.from({length:TOTAL},(_,i)=>state.stamps?.[i]?(notes[i]||''):''),updatedAt:state.updatedAt||new Date().toISOString(),exportedAt:new Date().toISOString(),goalName:'Resignation Stamp Card',completedStampCount:(state.stamps||[]).filter(Boolean).length,totalStampCount:TOTAL};
+    const link=document.createElement('a');
+    link.href=URL.createObjectURL(new Blob([JSON.stringify(out,null,2)],{type:'application/json'}));
+    link.download=((String(state.name||'').trim().replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'').toLowerCase())||'resignation-stamp-card')+'.json';
+    link.click();URL.revokeObjectURL(link.href);
+  },true);
+
+  function importError(message){
+    if(window.Swal)Swal.fire({title:'Could not import card',text:message,icon:'error',confirmButtonColor:'#7656df'});
+    else alert(message);
+  }
+  function normaliseImportedCard(raw){
+    if(!raw||typeof raw!=='object'||!Array.isArray(raw.stamps))throw new Error('Choose a Resignation Stamp Card JSON export.');
+    const stamps=Array.from({length:TOTAL},(_,i)=>validStamps.includes(raw.stamps[i])?raw.stamps[i]:null);
+    if(!stamps.some(Boolean)&&raw.stamps.some(value=>value!==null&&value!==undefined))throw new Error('That file does not contain recognised stamp designs.');
+    return {
+      card:{version:2,name:typeof raw.name==='string'?raw.name.slice(0,40):'',selectedStamp:validStamps.includes(raw.selectedStamp)?raw.selectedStamp:'fire',stamps,updatedAt:new Date().toISOString()},
+      notes:Array.from({length:TOTAL},(_,i)=>stamps[i]&&typeof raw.notes?.[i]==='string'?raw.notes[i].slice(0,MAX_NOTE):'')
+    };
+  }
+  importButton.addEventListener('click',()=>{importFile.value='';importFile.click()});
+  importFile.addEventListener('change',async()=>{
+    const file=importFile.files?.[0];
+    if(!file)return;
+    if(file.size>1024*1024){importError('Please choose a JSON card export smaller than 1 MB.');return}
+    try{
+      const imported=normaliseImportedCard(JSON.parse(await file.text()));
+      let approved=true;
+      if(window.Swal){const result=await Swal.fire({title:'Load this stamp card?',text:'This will replace the card and notes currently saved in this browser.',icon:'question',showCancelButton:true,confirmButtonText:'Load card',confirmButtonColor:'#7656df'});approved=result.isConfirmed}
+      else approved=confirm('Load this card? It will replace the card and notes currently saved in this browser.');
+      if(!approved)return;
+      localStorage.setItem(CARD_KEY,JSON.stringify(imported.card));
+      localStorage.setItem(NOTES_KEY,JSON.stringify(imported.notes));
+      location.reload();
+    }catch(error){importError(error instanceof Error?error.message:'This JSON file could not be read.')}
+  });
+
+  const completion=document.querySelector('#completion'),card=document.querySelector('.card');
+  let wasComplete=completion.classList.contains('show');
+  completion.setAttribute('aria-live','polite');
+  function celebrateCompletion(){
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    card.classList.remove('celebrating');
+    void card.offsetWidth;
+    card.classList.add('celebrating');
+    [...slots.querySelectorAll('.slot.filled')].forEach((slot,index)=>slot.style.animationDelay=(index%7)*45+'ms');
+    setTimeout(()=>{card.classList.remove('celebrating');[...slots.querySelectorAll('.slot')].forEach(slot=>slot.style.removeProperty('animation-delay'))},1050);
+    if(window.confetti){
+      confetti({particleCount:70,angle:60,spread:58,origin:{x:0,y:.7},colors:['#7656df','#f35f9f','#ff9d53','#9ae7ce']});
+      confetti({particleCount:70,angle:120,spread:58,origin:{x:1,y:.7},colors:['#7656df','#f35f9f','#ff9d53','#9ae7ce']});
+    }
+  }
+  new MutationObserver(()=>{
+    const complete=completion.classList.contains('show');
+    if(complete&&!wasComplete)celebrateCompletion();
+    wasComplete=complete;
+  }).observe(completion,{attributes:true,attributeFilter:['class']});
+})();
+</script>
+<script>
+(()=>{'use strict';
+  const slots=document.querySelector('#slots');
+  const cardState=()=>{try{return JSON.parse(localStorage.getItem('resignation-stamp-card-v2'))||{}}catch(_){return {}}};
+  const effects={
+    trash:{translateY:[-22,5,0],rotate:[-14,10,0],scale:[.7,1.1,1],duration:520,easing:'easeOutElastic(1,.55)'},
+    hammer:{translateY:[-14,4,0],rotate:[-34,12,0],scale:[.75,1.14,1],duration:470,easing:'easeOutBack'},
+    fire:{translateY:[12,-8,0],scale:[.55,1.28,1],duration:480,easing:'easeOutElastic(1,.65)'},
+    fist:{translateX:[-24,6,0],scale:[.72,1.16,1],duration:400,easing:'easeOutBack'},
+    bolt:{translateY:[-26,5,0],rotate:[-18,9,0],scale:[.6,1.2,1],duration:360,easing:'easeOutExpo'},
+    knife:{translateX:[22,-5,0],translateY:[-12,3,0],rotate:[28,-8,0],scale:[.72,1.13,1],duration:420,easing:'easeOutBack'},
+    bald:{translateY:[-20,4,0],scale:[.68,1.14,1],rotate:[-7,5,0],duration:460,easing:'easeOutElastic(1,.6)'},
+    gun:{translateX:[-28,8,0],rotate:[-10,5,0],scale:[.72,1.12,1],duration:360,easing:'easeOutBack'}
+  };
+  slots.addEventListener('click',event=>{
+    const button=event.target.closest('.slot');
+    if(!button||matchMedia('(prefers-reduced-motion: reduce)').matches||!window.anime)return;
+    const index=Number(button.dataset.index);
+    setTimeout(()=>{
+      const stamp=cardState().stamps?.[index],target=slots.children[index],effect=effects[stamp];
+      if(!target||!effect)return;
+      anime.remove(target);
+      anime({targets:target,...effect});
+    },0);
+  });
+})();
+</script></body></html>`;
+
+export default { async fetch(request, env, ctx) { void env; void ctx; const url = new URL(request.url); if (url.pathname !== '/' && url.pathname !== '/index.html') return new Response('Not found', { status: 404 }); return new Response(page, { headers: { 'content-type': 'text/html; charset=utf-8' } }); } };

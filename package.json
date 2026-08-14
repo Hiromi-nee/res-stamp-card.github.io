@@ -1,0 +1,13 @@
+{
+  "name": "resignation-stamp-card",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "bash scripts/build.sh",
+    "build:pages": "node scripts/build-pages.mjs",
+    "clean": "rm -rf dist pages-dist",
+    "preview": "npm run build:pages && python3 -m http.server 8000 --directory pages-dist",
+    "validate": "node scripts/validate-artifact.mjs"
+  },
+  "displayName": "Resignation Stamp Card"
+}
